@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Fetching open orders form shopify to update open orders excel workbook",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc"

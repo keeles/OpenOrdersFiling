@@ -1,11 +1,16 @@
-import {fetchOrders} from "./apiCall";
-import {createOrderWorkbook} from "./localWorkbook";
+import "./setupFetch.js";
+import {fetchOrders} from "./apiCall.js";
+import {createOrderWorkbook} from "./localWorkbook.js";
 import * as dotenv from "dotenv";
 import {siteId} from "./sharepointWorkbook";
 
 dotenv.config();
 
 async function main() {
+  if (!globalThis.fetch) {
+    //@ts-ignore
+    globalThis.fetch = fetch;
+  }
   const crailOrders = await fetchOrders(process.env.CRAILTAP_API_TOKEN as string, "crailstore-canada");
   const dixxonOrders = await fetchOrders(process.env.DIXXON_API_TOKEN as string, "dixxoncanada");
   const gastownOrders = await fetchOrders(process.env.GASTOWN_API_TOKEN as string, "gastownsupplyco");

@@ -1,5 +1,5 @@
 import {Client} from "@microsoft/microsoft-graph-client";
-import {getAccessToken} from "./accessToken";
+import {getAccessToken} from "./accessToken.js";
 import * as dotenv from "dotenv";
 
 dotenv.config();

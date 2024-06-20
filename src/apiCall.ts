@@ -1,10 +1,10 @@
 import "@shopify/shopify-api/adapters/node";
 import "@shopify/shopify-api/adapters/cf-worker";
 import "@shopify/shopify-api/adapters/web-api";
-import fetch from "node-fetch";
 import * as dotenv from "dotenv";
+import "./setupFetch.js";
 import ShopifyResponse from "./types/ShopifyResponse";
-import {previousDayCalc} from "./date";
+import {previousDayCalc} from "./date.js";
 
 dotenv.config();
 
