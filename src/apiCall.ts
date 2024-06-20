@@ -1,6 +1,7 @@
 import "@shopify/shopify-api/adapters/node";
 import "@shopify/shopify-api/adapters/cf-worker";
 import "@shopify/shopify-api/adapters/web-api";
+import fetch from "node-fetch";
 import * as dotenv from "dotenv";
 import ShopifyResponse from "./types/ShopifyResponse";
 import {previousDayCalc} from "./date";
@@ -19,6 +20,6 @@ export async function fetchOrders(accessToken: string, shop: string): Promise<Sh
       },
     }
   );
-  const data = await res.json();
+  const data = (await res.json()) as ShopifyResponse;
   return data;
 }
