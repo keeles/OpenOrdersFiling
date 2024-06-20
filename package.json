@@ -1,0 +1,20 @@
+{
+  "name": "openorders",
+  "version": "1.0.0",
+  "description": "Fetching open orders form shopify to update open orders excel workbook",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/msal-node": "^2.9.2",
+    "@microsoft/microsoft-graph-client": "^3.0.7",
+    "@shopify/shopify-api": "^11.0.0",
+    "@types/node": "^20.14.2",
+    "@types/node-xlsx": "^0.21.0",
+    "dotenv": "^16.4.5",
+    "node-xlsx": "^0.24.0"
+  }
+}
