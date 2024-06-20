@@ -1,4 +1,4 @@
-import ShopifyResponse from "./types/ShopifyResponse.js";
+import ShopifyResponse from "./types/ShopifyResponse";
 
 const brands = {
   dixxon: "Dixxon",

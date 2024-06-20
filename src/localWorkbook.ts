@@ -1,5 +1,5 @@
 import ShopifyResponse from "./types/ShopifyResponse";
-import {orderDataToBuffer} from "./buffer.js";
+import {orderDataToBuffer} from "./buffer";
 import {writeFile} from "node:fs/promises";
 import * as xlsx from "node-xlsx";
 

@@ -1,6 +1,5 @@
-import "./setupFetch.js";
-import {fetchOrders} from "./apiCall.js";
-import {createOrderWorkbook} from "./localWorkbook.js";
+import {fetchOrders} from "./apiCall";
+import {createOrderWorkbook} from "./localWorkbook";
 import * as dotenv from "dotenv";
 import {siteId} from "./sharepointWorkbook";
 
