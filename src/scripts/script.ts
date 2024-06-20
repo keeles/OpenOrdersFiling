@@ -2,6 +2,7 @@
  * This script sorts values by ranges in a SharePoint Excel workbook.
  * It assumes you have two sheets: "Open Orders" and "Unfulfilled".
  */
+//@ts-ignore
 function main(workbook: ExcelScript.Workbook) {
   const openOrders = workbook.getWorksheet("Open Orders");
   const unfulfilled = workbook.getWorksheet("Unfulfilled");
@@ -68,6 +69,7 @@ function main(workbook: ExcelScript.Workbook) {
 }
 
 // Adds the value to the specified cell in column H of the row where the range is defined
+//@ts-ignore
 function addValue(openOrders: ExcelScript.Worksheet, value: number, targetRow: number) {
   const cell = openOrders.getCell(targetRow - 1, 7);
   const currentValue = cell.getValue();
@@ -90,11 +92,13 @@ function splitString(cellValue: string): [string, string] {
 }
 
 // Clears the values in column H (index 7)
+//@ts-ignore
 function clearValues(openOrders: ExcelScript.Worksheet) {
   const usedRange = openOrders.getUsedRange();
   const rowCount = usedRange.getRowCount();
 
   for (let i = 0; i < rowCount; i++) {
+    //@ts-ignore
     openOrders.getCell(i, 7).clear(ExcelScript.ClearApplyTo.contents);
   }
 }

@@ -1,7 +1,7 @@
-import {fetchOrders} from "./src/apiCall";
-import {createOrderWorkbook} from "./src/localWorkbook";
+import {fetchOrders} from "./apiCall";
+import {createOrderWorkbook} from "./localWorkbook";
 import * as dotenv from "dotenv";
-import {siteId} from "./src/sharepointWorkbook";
+import {siteId} from "./sharepointWorkbook";
 
 dotenv.config();
 

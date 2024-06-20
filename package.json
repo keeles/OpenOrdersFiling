@@ -2,9 +2,10 @@
   "name": "openorders",
   "version": "1.0.0",
   "description": "Fetching open orders form shopify to update open orders excel workbook",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "ts-node index.ts"
+    "start": "node src/index.js",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
@@ -17,15 +18,19 @@
     "dotenv": "^16.4.5",
     "node-xlsx": "^0.24.0"
   },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "bin": "dist/index.js",
   "pkg": {
     "scripts": [
-      "index.ts"
+      "dist/index.js"
     ],
     "targets": [
       "node14-linux-x64",
       "node14-macos-x64",
       "node14-win-x64"
     ],
-    "outputPath": "dist"
+    "outputPath": "exe"
   }
 }
