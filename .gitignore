@@ -7,4 +7,4 @@ orders.xlsx
 tsconfig.json
 src/macro.vba
 dist
-exe
+build

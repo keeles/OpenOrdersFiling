@@ -8,6 +8,10 @@ import {previousDayCalc} from "./date";
 dotenv.config();
 
 export async function fetchOrders(accessToken: string, shop: string): Promise<ShopifyResponse> {
+  if (!globalThis.fetch) {
+    //@ts-ignore
+    globalThis.fetch = require("node-fetch");
+  }
   const yesterdayDateString = previousDayCalc();
   const res = await fetch(
     `https://${shop}.myshopify.com/admin/api/2024-04/orders.json?fulfillment_status=unfulfilled&limit=250&created_at_max=${yesterdayDateString}`,

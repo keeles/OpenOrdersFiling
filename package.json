@@ -15,8 +15,9 @@
     "@shopify/shopify-api": "^11.0.0",
     "@types/node": "^20.14.2",
     "@types/node-xlsx": "^0.21.0",
+    "@vercel/ncc": "^0.38.1",
     "dotenv": "^16.4.5",
-    "node-fetch": "^3.3.2",
+    "node-fetch": "^2.7.0",
     "node-xlsx": "^0.24.0",
     "ts-node": "^10.9.2"
   },
