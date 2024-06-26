@@ -5,7 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "npx ncc build src/index.ts -o dist",
+    "publish": "pkg dist/index.js --out-path=build --targets=node14-macos-x64,node14-win-x64"
   },
   "author": "",
   "license": "ISC",
