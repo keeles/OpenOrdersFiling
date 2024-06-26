@@ -66,6 +66,15 @@ function main(workbook: ExcelScript.Workbook) {
       }
     }
   }
+
+  // Mark batches as complete if all orders have been fulfilled
+  const updatedOpenOrdersValues = openOrdersRange.getValues();
+
+  for (const rng of ranges) {
+    if (!updatedOpenOrdersValues[rng.row - 1][7]) {
+      addValue(openOrders, 0, rng.row);
+    }
+  }
 }
 
 // Adds the value to the specified cell in column H of the row where the range is defined
@@ -73,6 +82,12 @@ function main(workbook: ExcelScript.Workbook) {
 function addValue(openOrders: ExcelScript.Worksheet, value: number, targetRow: number) {
   const cell = openOrders.getCell(targetRow - 1, 7);
   const currentValue = cell.getValue();
+
+  // For marking as complete pass a 0 into the function call
+  if (!value) {
+    cell.setValue("Complete");
+    return;
+  }
 
   if (currentValue) {
     cell.setValue(currentValue + ", " + value);
