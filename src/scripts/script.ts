@@ -1,23 +1,23 @@
 /**
- * This script sorts values by ranges in a SharePoint Excel workbook.
+ * This script sorts the order ID's on the unfulfilled sheet by pick range by ranges in the Open Orders sheet.
  * It assumes you have two sheets: "Open Orders" and "Unfulfilled".
+ * ts-ignore comments are just to keep VSCode from getting upset - not necessary when using script in excel
  */
 //@ts-ignore
 function main(workbook: ExcelScript.Workbook) {
   const openOrders = workbook.getWorksheet("Open Orders");
   const unfulfilled = workbook.getWorksheet("Unfulfilled");
 
-  // Clear values in the open orders worksheet
   clearValues(openOrders);
 
-  // Define a collection to store the ranges
+  // Find the ranges for batches that are still in the exposed rows
   let ranges: {start: number; end: number; row: number; brand: string}[] = [];
 
-  // Loop through the range where your ranges are defined
   const openOrdersRange = openOrders.getUsedRange();
   const openOrdersValues = openOrdersRange.getValues();
+  openOrders.getCell(0, 7).setValue("Completed by Warehouse");
 
-  for (let i = 0; i < openOrdersValues.length; i++) {
+  for (let i = 1; i < openOrdersValues.length; i++) {
     // Skip hidden rows
     if (openOrders.getCell(i, 0).getHidden()) {
       continue;
@@ -45,7 +45,7 @@ function main(workbook: ExcelScript.Workbook) {
     }
   }
 
-  // Loop through each cell in column A of the unfulfilled worksheet
+  // Loop through the order ID's and brand for each order in the unfulfilled worksheet
   const unfulfilledRange = unfulfilled.getUsedRange();
   const unfulfilledValues = unfulfilledRange.getValues();
 
@@ -53,7 +53,7 @@ function main(workbook: ExcelScript.Workbook) {
     const orderNumber = unfulfilledValues[i][0];
     const brand = unfulfilledValues[i][1];
 
-    // Check if the value falls within any of the defined ranges
+    // Check if the value falls within any of the open batches
     for (const rng of ranges) {
       if (
         typeof orderNumber === "number" &&
@@ -62,7 +62,7 @@ function main(workbook: ExcelScript.Workbook) {
         rng.brand === brand
       ) {
         addValue(openOrders, orderNumber, rng.row);
-        break; // Exit the loop once a match is found
+        break;
       }
     }
   }
@@ -77,7 +77,7 @@ function main(workbook: ExcelScript.Workbook) {
   }
 }
 
-// Adds the value to the specified cell in column H of the row where the range is defined
+// Adds the unfulfilled order ID to the appropriate row in the "Completed by Warehouse" column
 //@ts-ignore
 function addValue(openOrders: ExcelScript.Worksheet, value: number, targetRow: number) {
   const cell = openOrders.getCell(targetRow - 1, 7);
@@ -96,7 +96,6 @@ function addValue(openOrders: ExcelScript.Worksheet, value: number, targetRow: n
   }
 }
 
-// Splits the cell value based on the "-" character
 function splitString(cellValue: string): [string, string] {
   const values = cellValue.split("-");
   if (values.length >= 2) {
@@ -106,7 +105,6 @@ function splitString(cellValue: string): [string, string] {
   }
 }
 
-// Clears the values in column H (index 7)
 //@ts-ignore
 function clearValues(openOrders: ExcelScript.Worksheet) {
   const usedRange = openOrders.getUsedRange();
